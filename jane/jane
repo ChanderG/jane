@@ -1,0 +1,59 @@
+#!/usr/bin/env janet
+
+(defn evaluate "Eval a Jane expression in the given env." (exp env)
+  (cond
+    (or (number? exp) (string? exp)) exp
+    (symbol? exp) (env exp)
+    (tuple? exp) (let (first (exp 0)
+                        tail (tuple/slice exp 1))
+                   (cond # go over the special forms
+                     # define variables into the environment eg. (define a 10)
+                     (= first 'define) (let (key (tail 0)
+                                             value (evaluate (tail 1) env))
+                                         (put env key value)
+                                         value) # return the value for print
+                     # if conditional expression eg. (if condition then-exp else-exp)
+                     (= first 'if) (let (condition-res (evaluate (tail 0) env))
+                                     (evaluate (if condition-res (tail 1) (tail 2)) env))
+                     # quote special form - kinda not needed as ' is already provided for
+                     (= first 'quote) (tail 0)
+                     # lambda - define functions
+                     (= first 'lambda) tail
+                     # do form for bodies of exps
+                     (= first 'do) (let (results (map (fn (x) (evaluate x env)) tail))
+                                     (last results))
+                     # if no special form matches - evaluate function eg. (fn arg1 arg2 ...)
+                     (let (proc (env first)
+                           args (map (fn (x) (evaluate x env)) tail))
+                       (if (not (tuple? proc)) # user defined functions are tuples of form (arglist body)
+                         (apply proc args) # built-ins are accessed directly
+                         (do
+                           (def arg-pairs (zipcoll (proc 0) args))
+                           (def new-env (merge env arg-pairs))
+                           (evaluate (proc 1) new-env)
+                           )))))))
+
+(defn new-environment "Create a new Jane env." ()
+  (table
+   '+ + '- - '* * '/ / '% %
+   'eq = 'gt > 'lt <
+   ))
+
+(defn jane-repl "Run a Jane repl." ()
+  (print "Starting a Jane repl...")
+  (def currexp @"")
+  (def env (new-environment))
+  (while true
+    (getline "jane> " currexp) # read
+    (def inp (parse currexp)) # parse out input as Janet tuple
+    (def result (evaluate inp env)) # eval
+    # (pp env)
+    (pp result)))
+
+(defn run "Run a Jane program." (code)
+  (print "WIP"))
+
+(defn main "Main function." (prog & xs)
+  (if (= (length xs) 0)
+    (jane-repl)
+    (run (xs 0))))
