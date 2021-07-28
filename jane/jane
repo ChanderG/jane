@@ -25,6 +25,7 @@
                      # if no special form matches - evaluate function eg. (fn arg1 arg2 ...)
                      (let (proc (env first)
                            args (map (fn (x) (evaluate x env)) tail))
+                       (if (nil? proc) (print "function/built-in " first " does not exist!"))
                        (if (not (tuple? proc)) # user defined functions are tuples of form (arglist body)
                          (apply proc args) # built-ins are accessed directly
                          (do

@@ -1,0 +1,17 @@
+(define good-enough
+  (lambda (n guess)
+    (lte (abs (- n (* guess guess))) 0.001)))
+
+(define guess-sqr
+  (lambda (n guess)
+    (if (good-enough n guess)
+      guess
+      (guess-sqr n
+                 (/ (+ guess (/ n guess))
+                    2)))))
+
+(define sqr-root
+  (lambda (n)
+    (guess-sqr n 1)))
+
+(sqr-root 35)
