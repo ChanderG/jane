@@ -1,0 +1,7 @@
+(define fibonacci
+  (lambda (n)
+    (if (lte n 2)
+        1
+        (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
+
+(fibonacci 15)

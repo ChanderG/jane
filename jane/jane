@@ -36,7 +36,8 @@
 (defn new-environment "Create a new Jane env." ()
   (table
    '+ + '- - '* * '/ / '% %
-   'eq = 'gt > 'lt <
+   'eq = 'gt > 'lt < 'lte <=
+   'abs math/abs
    ))
 
 (defn jane-repl "Run a Jane repl." ()
@@ -50,8 +51,11 @@
     # (pp env)
     (pp result)))
 
-(defn run "Run a Jane program." (code)
-  (print "WIP"))
+(defn run "Run a Jane program." (filename)
+  (def f (file/open filename :r))
+  (def code (file/read f :all))
+  # hack warning: wrap the text from the code with a do block
+  (pp (evaluate (parse (buffer "(do " code ")")) (new-environment))))
 
 (defn main "Main function." (prog & xs)
   (if (= (length xs) 0)
