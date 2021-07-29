@@ -34,17 +34,16 @@
                            (evaluate (proc 1) new-env)
                            )))))))
 
-(defn new-environment "Create a new Jane env." ()
+(defn new-environment "Create a new Jane env with built-ins." ()
   (table
    '+ + '- - '* * '/ / '% %
    'eq = 'gt > 'lt < 'lte <=
-   'abs math/abs
+   'print print
    ))
 
-(defn jane-repl "Run a Jane repl." ()
+(defn jane-repl "Run a Jane repl." (env)
   (print "Starting a Jane repl...")
   (def currexp @"")
-  (def env (new-environment))
   (while true
     (getline "jane> " currexp) # read
     (def inp (parse currexp)) # parse out input as Janet tuple
@@ -52,13 +51,16 @@
     # (pp env)
     (pp result)))
 
-(defn run "Run a Jane program." (filename)
+(defn load "Load a Jane program." (filename env)
   (def f (file/open filename :r))
   (def code (file/read f :all))
   # hack warning: wrap the text from the code with a do block
-  (pp (evaluate (parse (buffer "(do " code ")")) (new-environment))))
+  (evaluate (parse (buffer "(do " code ")")) env))
 
 (defn main "Main function." (prog & xs)
+  (def env (new-environment))
+  # load stdlib modules
+  (load "std/math.jane" env)
   (if (= (length xs) 0)
-    (jane-repl)
-    (run (xs 0))))
+    (jane-repl env)
+    (pp (load (xs 0) env))))

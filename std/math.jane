@@ -1,0 +1,5 @@
+(define abs
+  (lambda (num)
+    (if (gt num 0)
+      num
+      (* -1 num))))
