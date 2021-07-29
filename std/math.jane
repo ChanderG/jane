@@ -15,7 +15,7 @@
 (define max
   (lambda (xs)
     (if (eq (len xs) 0)
-      '()
+      ()
       (if (eq (len xs) 1)
         (head xs)
         (do

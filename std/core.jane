@@ -1,6 +1,6 @@
 (define len
   (lambda (xs)
-    (if (eq xs '())
+    (if (eq xs ())
       0
       (+ 1 (len (tail xs))))))
 
@@ -9,3 +9,11 @@
     (if (lte (len xs) 1)
       xs
       (ladd (rev (tail xs)) ((head xs))))))
+
+(define last
+  (lambda (xs)
+    (if (eq (len xs) 0)
+        ()
+        (if (eq (len xs) 1)
+            (head xs)
+            (last (tail xs))))))

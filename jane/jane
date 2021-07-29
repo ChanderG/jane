@@ -2,7 +2,7 @@
 
 (defn evaluate "Eval a Jane expression in the given env." (exp env)
   (cond
-    (or (number? exp) (string? exp)) exp
+    (or (number? exp) (string? exp) (and (tuple? exp) (= (length exp) 0))) exp
     (symbol? exp) (env exp)
     (tuple? exp) (let (first (exp 0)
                         tail (tuple/slice exp 1))
