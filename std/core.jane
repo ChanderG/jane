@@ -1,0 +1,5 @@
+(define len
+  (lambda (xs)
+    (if (eq xs '())
+      0
+      (+ 1 (len (tail xs))))))

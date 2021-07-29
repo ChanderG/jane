@@ -35,11 +35,14 @@
                            )))))))
 
 (defn new-environment "Create a new Jane env with built-ins." ()
-  (table
-   '+ + '- - '* * '/ / '% %
-   'eq = 'gt > 'lt < 'lte <=
-   'print print
-   ))
+  (let (head (fn (xs) (xs 0))
+        tail (fn (xs) (tuple/slice xs 1)))
+    (table
+        '+ + '- - '* * '/ / '% %
+        'eq = 'gt > 'lt < 'lte <=
+        'head head 'tail tail
+        'print print
+        )))
 
 (defn jane-repl "Run a Jane repl." (env)
   (print "Starting a Jane repl...")
@@ -60,6 +63,7 @@
 (defn main "Main function." (prog & xs)
   (def env (new-environment))
   # load stdlib modules
+  (load "std/core.jane" env)
   (load "std/math.jane" env)
   (if (= (length xs) 0)
     (jane-repl env)

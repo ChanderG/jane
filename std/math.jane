@@ -3,3 +3,15 @@
     (if (gt num 0)
       num
       (* -1 num))))
+
+(define max
+  (lambda (xs)
+    (if (eq (len xs) 0)
+      '()
+      (if (eq (len xs) 1)
+        (head xs)
+        (do
+          (define tailmax (max (tail xs)))
+          (if (gt (head xs) tailmax)
+            (head xs)
+            tailmax))))))
