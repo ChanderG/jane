@@ -3,3 +3,9 @@
     (if (eq xs '())
       0
       (+ 1 (len (tail xs))))))
+
+(define rev
+  (lambda (xs)
+    (if (lte (len xs) 1)
+      xs
+      (ladd (rev (tail xs)) ((head xs))))))
