@@ -1,9 +1,17 @@
+# inline comments using Janet's commenting mechanism
+# can be used anywhere except the last line of the file
+
+# comments using eval'ed strings - can be used only at the top level
+
+"calculate abs of a number"
 (define abs
   (lambda (num)
     (if (gt num 0)
       num
       (* -1 num))))
 
+"note: lack of tail recursion.
+ also note: cannot generalize to min without macros."
 (define max
   (lambda (xs)
     (if (eq (len xs) 0)
@@ -15,3 +23,5 @@
           (if (gt (head xs) tailmax)
             (head xs)
             tailmax))))))
+
+"hash based comments can't come at the end of the file"
