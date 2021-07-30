@@ -17,3 +17,11 @@
         (if (eq (len xs) 1)
             (head xs)
             (last (tail xs))))))
+
+(define flatten
+  (lambda (xs)
+    (if (not (list? xs))
+      (list xs)
+      (if (eq xs ())
+        ()
+        (ladd (flatten (head xs)) (flatten (tail xs)))))))

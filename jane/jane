@@ -41,8 +41,9 @@
         ladd (fn (xs ys) (tuple (splice xs) (splice ys)))) # add 2 lists
     (table
         '+ + '- - '* * '/ / '% %
-        'eq = 'gt > 'lt < 'lte <=
-        'head first 'tail tail 'ladd ladd
+        'eq = 'gt > 'lt < 'lte <= 'not not
+        'list tuple 'head first 'tail tail 'ladd ladd
+        'list? tuple?
         'print print
         )))
 
