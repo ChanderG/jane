@@ -54,7 +54,7 @@
                   (one-or-more space) (group ,jane-symbol))))
 
 (defconst jane-constant-pattern
-  (rx-to-string `(group (or "()"))))
+  (rx-to-string `(group (or "()" "true" "false"))))
 
 (defconst jane-highlights
   `((,jane-special-form-pattern . (1 font-lock-keyword-face))

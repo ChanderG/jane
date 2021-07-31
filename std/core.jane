@@ -1,3 +1,35 @@
+# --------------------------------------------------
+# Boolean core functions
+# --------------------------------------------------
+
+(define not
+  (lambda (x)
+    (if x
+      false
+      true)))
+
+# TODO: we have a terrible parser. It should detect if there are undefined vars being used and warn.
+
+(define and
+  (lambda (xs)
+    (if (eq xs ())
+      true
+      (if (not (head xs))
+        false
+        (and (tail xs))))))
+
+(define or
+  (lambda (xs)
+    (if (eq xs ())
+      false
+      (if (head xs)
+        true
+        (or (tail xs))))))
+
+# --------------------------------------------------
+# List core functions
+# --------------------------------------------------
+
 (define len
   (lambda (xs)
     (if (eq xs ())
