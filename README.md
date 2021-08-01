@@ -30,6 +30,10 @@ Working examples can be found in the `examples/` directory.
 
 Note: With the introduction of a stdlib, until I figure out installation etc, all commands have to be run from the project dir. If you `cd` into `./jane` and run the `jane` script, the stdlib will not load and it will error out in an ugly way (until I figure out better error handling).
 
+## Stdlib
+
+Now contains a simple standard library in `std/`! One more thing: it comes with tests included. (See files named `test_*.jane`).
+
 ## Editor Support
 
 For now, comes out of the box with an Emacs mode with simple syntax highlighting for Jane. See: `editor/jane-mode.el`.

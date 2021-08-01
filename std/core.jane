@@ -57,3 +57,35 @@
       (if (eq xs ())
         ()
         (ladd (flatten (head xs)) (flatten (tail xs)))))))
+
+# --------------------------------------------------
+# Test core functions
+# --------------------------------------------------
+ 
+# Design for a better test function:
+# Need to have some more syntactic sugar (easer function creation) and the ability to evaluate quoted expressions.
+
+# (define test_battery
+#  (lambda (name tests)
+#    (do 
+#       (print "Starting test battery: " name)
+#       (define run_test
+#         (lambda (test)
+#           (pp (head test))
+#         ))
+#       (define run_tests
+#          (lambda (tests)
+#              (if (eq tests ())
+#                (print "Tests ended.")
+#                (do 
+#                   (run_test (head tests))
+#                   (run_tests (tail tests))))))
+#       (run_tests tests)
+#    )))
+
+# Potential usuage:
+# (test_battery "len"
+#   (
+#     '((len ()) 0)
+#     '((len '(1)) 1)
+#   ))
