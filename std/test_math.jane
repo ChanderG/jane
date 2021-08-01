@@ -1,0 +1,15 @@
+(define math_tests
+  (lambda ()
+    (and (
+      # abs
+      (eq (abs 0) 0)
+      (eq (abs 1) 1)
+      (eq (abs -1) 1)
+      # max
+      (eq (max '(1 2 3 4)) 4)
+      (eq (max '(2 3 4 1)) 4)
+      (eq (max '(-2 -3 4 1)) 4)
+    ))
+  ))
+
+(math_tests)

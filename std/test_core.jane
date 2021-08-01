@@ -1,0 +1,25 @@
+(define core_tests
+  (lambda ()
+    (and (
+      # len
+      (eq (len ()) 0)
+      (eq (len '(1)) 1)
+      (eq (len '(1 2 3 4)) 4)
+      # rev
+      (eq (rev ()) ())
+      (eq (rev '(1)) '(1))
+      (eq (rev '(1 2 3 4)) '(4 3 2 1))
+      # last
+      (eq (last ()) ())
+      (eq (last '(1)) 1)
+      (eq (last '(1 2 3 4)) 4)
+      # flatten
+      (eq (flatten ()) ())
+      (eq (flatten '(1)) '(1))
+      (eq (flatten '(1 2 3 4)) '(1 2 3 4))
+      (eq (flatten '(1 (2 3) 4)) '(1 2 3 4))
+      (eq (flatten '(1 (2 3) ((4)))) '(1 2 3 4))
+    ))
+  ))
+
+(core_tests)
