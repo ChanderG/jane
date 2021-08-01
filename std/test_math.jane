@@ -1,6 +1,6 @@
 (define math_tests
   (lambda ()
-    (and (
+    (and '(
       # abs
       (eq (abs 0) 0)
       (eq (abs 1) 1)

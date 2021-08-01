@@ -1,6 +1,6 @@
 (define core_tests
   (lambda ()
-    (and (
+    (and '(
       # len
       (eq (len ()) 0)
       (eq (len '(1)) 1)

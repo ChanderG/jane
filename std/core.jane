@@ -40,7 +40,7 @@
   (lambda (xs)
     (if (lte (len xs) 1)
       xs
-      (ladd (rev (tail xs)) ((head xs))))))
+      (ladd (rev (tail xs)) (list (head xs))))))
 
 (define last
   (lambda (xs)
