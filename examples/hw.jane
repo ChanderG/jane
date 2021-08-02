@@ -1,0 +1,3 @@
+#!/usr/bin/env jane
+
+(print "Hello, World; from Jane.")

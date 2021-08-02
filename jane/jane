@@ -63,8 +63,8 @@
 (defn main "Main function." (prog & xs)
   (def env (new-environment))
   # load stdlib modules
-  (load "std/core.jane" env)
-  (load "std/math.jane" env)
+  (defn stdpath (lib) (string (os/getenv "JANEPATH") "/std/" lib ".jane"))
+  (each lib '("core" "math") (load (stdpath lib) env))
   (if (= (length xs) 0)
     (jane-repl env)
     (pp (load (xs 0) env))))
