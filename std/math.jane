@@ -1,8 +1,11 @@
 # inline comments using Janet's commenting mechanism
 # can be used anywhere except the last line of the file
 
-# comments using eval'ed strings - can be used only at the top level
+(define sqr
+  (lambda (num)
+    (* num num)))
 
+# comments using eval'ed strings - can be used only at the top level
 "calculate abs of a number"
 (define abs
   (lambda (num)

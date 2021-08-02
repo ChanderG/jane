@@ -58,6 +58,13 @@
         ()
         (ladd (flatten (head xs)) (flatten (tail xs)))))))
 
+(define map
+  (lambda (func xs)
+    (if (eq xs ())
+      ()
+      (ladd (list (func (head xs))) (map func (tail xs))))
+  ))
+
 # --------------------------------------------------
 # Test core functions
 # --------------------------------------------------

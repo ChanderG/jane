@@ -18,20 +18,20 @@
                      # quote special form - kinda not needed as ' is already provided for
                      (= first 'quote) (tail 0)
                      # lambda - define functions
-                     (= first 'lambda) tail
+                     (= first 'lambda) exp
                      # do form for bodies of exps
                      (= first 'do) (let (results (map (fn (x) (evaluate x env)) tail))
                                      (last results))
                      # if no special form matches - evaluate function eg. (fn arg1 arg2 ...)
-                     (let (proc (env first)
+                     (let (proc (if (tuple? first) first (env first)) # if first arg is tuple assume it's a lambda and apply it directly instead of doing env lookups
                            args (map (fn (x) (evaluate x env)) tail))
                        (if (nil? proc) (print "function/built-in " first " does not exist!"))
-                       (if (not (tuple? proc)) # user defined functions are tuples of form (arglist body)
+                       (if (not (tuple? proc)) # user defined functions are tuples of form ('lambda arglist body)
                          (apply proc args) # built-ins are accessed directly
                          (do
-                           (def arg-pairs (zipcoll (proc 0) args))
+                           (def arg-pairs (zipcoll (proc 1) args))
                            (def new-env (merge env arg-pairs))
-                           (evaluate (proc 1) new-env)
+                           (evaluate (proc 2) new-env)
                            )))))))
 
 (defn new-environment "Create a new Jane env with built-ins." ()
@@ -40,8 +40,7 @@
     (table
         '+ + '- - '* * '/ / '% %
         'eq = 'gt > 'lt < 'lte <=
-        'list tuple 'head first 'tail tail 'ladd ladd
-        'list? tuple?
+        'list tuple 'head first 'tail tail 'ladd ladd 'list? tuple?
         'print print
         )))
 
