@@ -4,4 +4,6 @@
         1
         (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
 
-(fibonacci 15)
+(if (eq (len Args) 1)
+  (do (print "No <num> arg provided. Fibonacci 15: ") (fibonacci 15))
+  (fibonacci (parse (last Args))))

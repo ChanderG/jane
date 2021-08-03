@@ -42,6 +42,7 @@
         'eq = 'gt > 'lt < 'lte <=
         'list tuple 'head first 'tail tail 'ladd ladd 'list? tuple?
         'print print
+        'parse parse
         )))
 
 (defn jane-repl "Run a Jane repl." (env)
@@ -67,4 +68,4 @@
   (each lib '("core" "math") (load (stdpath lib) env))
   (if (= (length xs) 0)
     (jane-repl env)
-    (pp (load (xs 0) env))))
+    (pp (load (xs 0) (put env 'Args xs)))))
