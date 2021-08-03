@@ -65,6 +65,12 @@
       (ladd (list (func (head xs))) (map func (tail xs))))
   ))
 
+(define foldl
+  (lambda (init func xs)
+    (if (eq xs ())
+      init
+      (foldl (func init (head xs)) func (tail xs)))))
+
 # --------------------------------------------------
 # Test core functions
 # --------------------------------------------------

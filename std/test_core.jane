@@ -1,6 +1,6 @@
 (define core_tests
   (lambda ()
-    (and '(
+    (and (list
       # len
       (eq (len ()) 0)
       (eq (len '(1)) 1)
@@ -23,6 +23,11 @@
       (eq (map sqr ()) ())
       (eq (map sqr '(1 2 3 4)) '(1 4 9 16))
       (eq (map (lambda (x) (* x x)) '(1 2 3 4)) '(1 4 9 16))
+      # foldl
+      (eq (foldl 0 + ()) 0)
+      (eq (foldl 0 + '(1)) 1)
+      (eq (foldl 0 + '(1 2 3 4)) 10)
+      (eq (foldl 1 * '(1 2 3 4)) 24)
     ))
   ))
 
